@@ -44,9 +44,6 @@ def meitsi(df):
     if omaId:
         print("OmaId löytyi, palautetaan df")
         omadf = df.loc[df['studentId'] == omaId]
-        # print(omadf.head())
-        # omadf.to_csv(hakemisto+'meitsi.csv', index=False)
-        # omadf.to_excel(hakemisto+'meitsi.xlsx', index=False)
         return omadf    
     else:
         raise Exception("Virhe rajaa.meitsi(): omaa Id:tä ei löydy.")
@@ -56,12 +53,8 @@ def bg_sarakkeen_mukaan(df, bg, sarake=None, rajausehto=None):
     if sarake in df.columns:
         df = df.loc[df[sarake] == rajausehto]    
         return df
-    
-    # print()
-    # print(len(df))
+
     df = pd.merge(df, bg[['studentId', sarake]], how="left", on="studentId")
-    # print(len(df))
-    # print()
     df = df.loc[df[sarake] == rajausehto]
     df.drop(columns=[sarake], inplace=True)
     return df
@@ -94,6 +87,7 @@ def poista_uudemmat_suoritukset(df):
 
 
 def tutkintoon_asti(df, tutkinto=None):
+    """ kesken """
     if tutkinto == None:
         print("tutkintoon_asti: ei annettua tutkintoa")
         return df
@@ -121,65 +115,3 @@ def tutkintoon_asti(df, tutkinto=None):
     # df.drop(columns=['kandidate', 'maxdate'], inplace=True)
     
     return df
-
-
-def kasviskandi12(df, bg):
-    # hakemisto = "../data_v3/"
-    # dftiedosto = "dataset.csv"
-    # bgtiedosto = "student_background.csv"
-    
-    # df = pd.read_csv(hakemisto+dftiedosto, delimiter=",") #, encoding = "ISO-8859-1"
-    # print(df.head())
-    
-    # bg = pd.read_csv(hakemisto+bgtiedosto, delimiter=",") #, encoding = "ISO-8859-1"
-    # print(bg.head())
-    
-    # print(bg['koulutusohjelma'].unique())
-    # print(len(df))
-    df = pd.merge(df, bg, how="left", on="studentId")
-    # print(len(df))
-    # print(df.head())
-    # print(df.columns)
-    # print(len(df), len(df['studentId'].unique()))
-    
-    df = df.loc[df['koulutusohjelma'] == 'Kasvatustieteet (yleinen ja aikuiskasvatustiede)']
-    
-    print(len(df), len(df['studentId'].unique()))
-    df = df.loc[df['aloitusvuosi'] == "Lv 2012-2013"]
-    print(len(df), len(df['studentId'].unique()))
-    df = df.loc[df['aloituskuukausi'] >= 7]
-    print(len(df), len(df['studentId'].unique()))
-    df = df.loc[df['aloituskuukausi'] <= 9]
-    print(len(df), len(df['studentId'].unique()))
-    
-    maxdatedf = df.groupby('studentId').max()
-    maxdatedf.reset_index(inplace=True)
-    maxdatedf.rename(columns={'date': 'maxdate'}, inplace=True)
-    df = pd.merge(df, maxdatedf[['studentId','maxdate']], how="left", on="studentId")
-    
-    kandiloc = df.loc[(df['isModule'] == True) & (df['course'].str.contains('andidaat'))]
-    kandiloc.rename(columns={'date': 'kandidate'}, inplace=True)
-    df = pd.merge(df, kandiloc[['studentId', 'kandidate']], how="left", on="studentId")
-    
-    df.loc[df['kandidate'].notnull(), 'maxdate'] = df['kandidate']
-    
-    df = df.loc[df['date'] <= df['maxdate']]
-    
-    df.drop(columns=['kandidate', 'maxdate'], inplace=True)
-    
-    print(len(df), len(df['studentId'].unique()))
-    
-    print()
-    
-    return df
-    
-    
-    
-    # df['kandi'] = (df['isModule'] == True) & (df['course'].str.contains('andidaat'))
-    # print(df['kandi'].head())
-    # print(df['kandi'].unique())
-    
-    # print(df.groupby('kandi').count())
-    
-    
-    # df.to_csv(hakemisto+"dataset_kasviskandit12.csv", index=False)
