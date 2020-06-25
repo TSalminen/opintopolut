@@ -114,7 +114,7 @@ def kumulatiivinen_opdf(df, lower_limit=0, upper_limit=0, aloita_nollasta=False)
         aloitusperiodi = 1
     
     for i in range(lower_limit, upper_limit+1):
-        df2 = df.loc[(df['opiskeluperiodi'] >= aloitusperiodi) & (df['opiskeluperiodi'] <= i) & (~df['isModule']) & (df['gradeSimple'] != 'Hylätty')]
+        df2 = df.loc[(df['opiskeluperiodi'] >= aloitusperiodi) & (df['opiskeluperiodi'] <= i) & (~df['isModule']) & (df['gradeSimple'] == 'Hyväksytty')]
         df2 = df2.groupby(['studentId']).sum()[['op']]
         # df2.reset_index(inplace=True)
         df2.rename(columns={'op':str(muuta_periodit_floatiksi(i))}, inplace=True)        
