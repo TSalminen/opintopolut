@@ -1,0 +1,29 @@
+Kaikissa kuvioissa lisäksi aiempien kuvioiden rajaukset rajaukset.
+
+Rajaukset:
+fig1
+mukana kaikkien kolmen koulutusohjelman opiskelijat, 
+- joilla vain yhden tutkinnon suoritusoikeus (ei useampia rivejä taustatiedoissa)
+- joilla kahden opiskeluvuoden lopussa enintään 200 op
+- jotka aloittavat opinnot kandidaatin tutkinnon opinnoista (ei pelkkiä maisteriopiskelijoita)
+
+fig2
+- rajattu pois opiskelijat, joilla tutkinnon suoritusoikeus, mutta ei datassa lainkaan suorituksia (edes hylättyjä)
+
+fig3
+- rajattu pois oletetut vaihto-opiskelijat (suorittaneet vaihto-opiskelijoiden orientaatiokurssin tai opiskelleet suomen alkeita)
+
+fig4
+- rajattu niihin opiskelijoihin, joilla on enintään 50 op aiempia opintoja ennen opintojen aloittamista
+
+fig5
+- rajattu niihin opiskelijoihin, joilla ei ole lainkaan aiempia opintoja ennen opintojen aloittamista. Rajattu joukko kuvaa siis täysin uusia opiskelijoita, jotka aloittavat opintonsa kandidaatin tutkinnon alusta ilman aiempaa opiskelukokemusta.
+
+fig6-fig8
+- kuviot aiemmilla rajauksilla koulutusohjelmittain
+
+fig9
+- vähintään 180 op koko opintojen aikana suorittaneiden osuus aiemmin rajatusta uusien opiskelijoiden ryhmästä
+
+fig10
+- 180 op saavuttamisen kesto periodeissa niillä matematiikan opiskelijoilla, jotka ovat suorittaneet vähintään 180 op
